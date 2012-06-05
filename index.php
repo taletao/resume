@@ -3,7 +3,7 @@ require_once('OpusHelper.php');
 
 $infoData = new OpusHelper();
 
-$data =  $infoData -> __getInfo('opus.txt');
+$opus =  $infoData -> getInfo('opus.txt');
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -15,7 +15,7 @@ $data =  $infoData -> __getInfo('opus.txt');
         <table border="1" cellpadding="0" cellspacing="0" >
             <tr >
                 <td valign="center" ><p >姓名：</p></td>
-                <td valign="center" ><p ><a href="<?php echo $xml->uri; ?>"><?php echo $xml->author->name; ?></a> </p></td>
+                <td valign="center" ><p >tale</a> </p></td>
                 <td width="216" valign="center" ><p >性别 </p></td>
                 <td valign="center" ><p >男 </p></td>
                 <td valign="center" colspan="2" ><p >民族 </p></td>
@@ -40,34 +40,16 @@ $data =  $infoData -> __getInfo('opus.txt');
                 <td valign="center" colspan="11" ><p >个人博客：<a href="<?php echo $xml->author->uri; ?>"><?php echo $xml->author->uri; ?></a></p></td>
             </tr>
             <tr >
-                <td valign="center" colspan="2" >博文标题</td>
-                <td valign="center" colspan="5" >博文内容</td>
-                <td valign="center" colspan="3" >发表时间</td>
+                <td valign="center" colspan="2" >项目标题</td>
+                <td valign="center" colspan="2" >项目简介</td>
+                <td valign="center" colspan="5" >项目截图</td>
             </tr>
+            
             <?php
-            foreach ($xml->entry as $item) {
-                //var_dump($item->link);exit;
-                if (!preg_match("$excludePattern", $item->title)) {
-                    $filteredTitle = htmlspecialchars("$item->title");
-                    $filteredTitle = str_replace("$username: ", "", $filteredTitle);
-                    //Convert the time zone in China --转成中国时区
-                    date_default_timezone_set('Asia/Shanghai');
-                    $i++;
-                    if ($i > $count) {
-                        break;
-                    }
-                    ?>
-                    <tr >
-                        <td valign="center" colspan="2" >
-                                <a href ="<?php echo $item->id; ?>">
-                                    <?php echo $filteredTitle; ?>
-                                </a>
-                        </td>
-                        <td valign="center" colspan="5" ><?php echo $item->content; ?></td>
-                        <td valign="center" colspan="3" ><?php echo date("Y-m-d H:i:s", strtotime($item->published)); ?></td>
-                    </tr>
-                    <?php
-                }
+            foreach ($opus as $value) {
+                echo '<tr><td valign="center" colspan="2" >' . $value['0'] . '</td>
+                <td valign="center" colspan="2" >' . $value['1'] . '</td>
+                <td valign="center" colspan="5" ><img src=" ' . $value['2'] . '" width="350"/></td></tr>';
             }
             ?>
         </table>
