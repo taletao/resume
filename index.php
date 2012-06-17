@@ -1,5 +1,6 @@
 <?php
 require_once('OpusHelper.php');
+require_once('rss.php');
 
 $infoData = new OpusHelper();
 
